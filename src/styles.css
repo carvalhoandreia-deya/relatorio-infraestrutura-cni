@@ -1,0 +1,537 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Source Sans 3", "Segoe UI", sans-serif;
+  --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --color-paper: #f3efe6;
+  --color-ink: #142029;
+  --color-muted: #4a5962;
+  --color-line: #ddd6c8;
+  --color-card: #fffcf7;
+  --color-green: #0f6a4c;
+  --color-green-soft: #e4f2eb;
+  --color-copper: #9a4520;
+  --color-copper-soft: #f8ece4;
+  --color-series-a: #0f6a4c;
+  --color-series-b: #1b3a4b;
+  --color-series-c: #9a4520;
+  --color-series-d: #7fa390;
+  --color-series-e: #c4a574;
+  --color-series-f: #3e5c4e;
+  --color-header: #142029;
+  --color-header-fg: #fffcf7;
+  --color-accent: #0f6a4c;
+  --color-accent-soft: #e4f2eb;
+  --color-accent-fg: #fffcf7;
+  --color-scrim: #142029;
+  --color-note: #e4f2eb;
+  --color-title: #ffffff;
+  --color-title-ink: #142029;
+  --find-bg: #f6e3a1;
+  --find-ink: #142029;
+}
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled),
+  summary {
+    cursor: pointer;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+.app-offset {
+  padding-top: 10.25rem;
+}
+
+.nav-panel {
+  top: 10.25rem;
+  height: calc(100dvh - 10.25rem);
+}
+
+@media (max-width: 1023px) {
+  .nav-panel {
+    transform: translateX(-100%);
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .nav-panel.is-open {
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-offset {
+    padding-top: 3.5rem;
+  }
+
+  .nav-panel {
+    top: 3.5rem;
+    height: calc(100dvh - 3.5rem);
+  }
+}
+
+.mobile-actions {
+  display: flex;
+}
+
+@media (min-width: 1024px) {
+  .mobile-actions {
+    display: none !important;
+  }
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+::highlight(report-find) {
+  background-color: var(--find-bg);
+  color: var(--find-ink);
+}
+
+::highlight(report-find-current) {
+  background-color: var(--color-accent);
+  color: var(--color-accent-fg);
+}
+
+/* Escuro: a mesma paleta editorial, invertida para leitura noturna. */
+html[data-theme="dark"] {
+  --color-paper: #10181c;
+  --color-ink: #f4f0e8;
+  --color-muted: #aeb8bd;
+  --color-line: #2c3a41;
+  --color-card: #1a262c;
+  --color-green: #3cba86;
+  --color-green-soft: #163028;
+  --color-copper: #e4a07a;
+  --color-copper-soft: #3a261c;
+  --color-series-a: #3cba86;
+  --color-series-b: #8ec4d4;
+  --color-series-c: #e4a07a;
+  --color-series-d: #7fa390;
+  --color-series-e: #d4c4a4;
+  --color-series-f: #5f8f78;
+  --color-header: #0c1418;
+  --color-header-fg: #f4f0e8;
+  --color-accent: #3cba86;
+  --color-accent-soft: #163028;
+  --color-accent-fg: #062016;
+  --color-scrim: #0c1418;
+  --color-note: #1a3044;
+  --color-title: #e8eef2;
+  --color-title-ink: #102033;
+  --find-bg: #8a6a22;
+  --find-ink: #fff8e8;
+}
+
+/* Manual de Marcas CNI, 2024: azul #164194 e detalhe #008BD2. */
+html[data-theme="cni"] {
+  --color-paper: #f4f7fb;
+  --color-ink: #10244a;
+  --color-muted: #3e5678;
+  --color-line: #d5e1ef;
+  --color-card: #ffffff;
+  --color-series-a: #164194;
+  --color-series-b: #008bd2;
+  --color-series-c: #9a4520;
+  --color-series-d: #6a8cbf;
+  --color-series-e: #b7cbe4;
+  --color-series-f: #0e2f6b;
+  --color-header: #ffffff;
+  --color-header-fg: #164194;
+  --color-accent: #164194;
+  --color-accent-soft: #e7f1fb;
+  --color-accent-fg: #ffffff;
+  --color-scrim: #10244a;
+  --color-note: #e7f1fb;
+  --color-title: #e7f1fb;
+  --color-title-ink: #10244a;
+  --find-bg: #f6e3a1;
+  --find-ink: #142029;
+}
+
+html:has(.pdf-doc),
+html:has(.pdf-doc) body {
+  background: #ffffff;
+}
+
+.pdf-photo {
+  display: none;
+}
+
+.pdf-doc {
+  --color-paper: #ffffff;
+  --color-ink: #10244a;
+  --color-muted: #3e5678;
+  --color-line: #d5e1ef;
+  --color-card: #ffffff;
+  --color-green: #0f6a4c;
+  --color-copper: #9a4520;
+  --color-series-a: #164194;
+  --color-series-b: #008bd2;
+  --color-series-c: #9a4520;
+  --color-series-d: #6a8cbf;
+  --color-series-e: #b7cbe4;
+  --color-series-f: #0e2f6b;
+  --color-accent: #164194;
+  --color-accent-soft: #e7f1fb;
+  --color-accent-fg: #ffffff;
+  --color-note: #e7f1fb;
+  --color-title: #e7f1fb;
+  --color-title-ink: #10244a;
+  max-width: 186mm;
+  margin: 0 auto;
+  padding: 0;
+  background: #ffffff;
+  color: var(--color-ink);
+  font-size: 12.5px;
+  line-height: 1.5;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.pdf-mast {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 0 0.55rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 2.5px solid #164194;
+}
+
+.pdf-logo {
+  display: block;
+  height: 2.35rem;
+  width: auto;
+  max-width: 15.5rem;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.pdf-mast-meta {
+  margin: 0;
+  color: #164194;
+  font-size: 10.5px;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  line-height: 1.35;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.pdf-lead {
+  margin: 0 0 0.7rem;
+  break-inside: avoid;
+}
+
+.pdf-lead img,
+.pdf-doc .pdf-photo img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto !important;
+  max-height: 5.5cm;
+  margin: 0 auto;
+  border-radius: 0.35rem;
+  object-fit: contain;
+}
+
+.pdf-doc .pdf-photo {
+  display: block;
+  max-width: 100%;
+  margin: 0.65rem auto 0.75rem;
+  break-inside: avoid;
+  break-after: avoid;
+}
+
+.pdf-chapter {
+  break-inside: avoid;
+}
+
+.pdf-colophon {
+  margin-top: 1rem;
+  border-top: 1px solid var(--color-line);
+  padding-top: 0.45rem;
+  color: var(--color-muted);
+  font-size: 10.5px;
+  line-height: 1.45;
+}
+
+.pdf-doc section {
+  padding-top: 0.28rem !important;
+  padding-bottom: 0.05rem !important;
+}
+
+.pdf-doc section > .rounded-lg {
+  padding: 0.5rem 0.75rem !important;
+}
+
+.pdf-doc section .inline-flex {
+  height: 1.25rem;
+  font-size: 10px;
+}
+
+.pdf-doc section > .mt-6,
+.pdf-doc .space-y-8 > * + * {
+  margin-top: 0.38rem !important;
+}
+
+.pdf-doc h1 {
+  font-size: 1.65rem !important;
+}
+
+.pdf-doc h2 {
+  font-size: 1.08rem !important;
+  break-after: avoid;
+}
+
+.pdf-doc #sumario .mt-8 {
+  display: block;
+}
+
+.pdf-doc #sumario .grid {
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem;
+}
+
+.pdf-doc #sumario a {
+  padding: 0.35rem 0.5rem !important;
+  break-inside: avoid;
+}
+
+.pdf-doc #sumario .font-serif {
+  font-size: 1rem !important;
+}
+
+.pdf-doc #sumario .mb-3 {
+  margin-bottom: 0.25rem !important;
+}
+
+.pdf-doc .space-y-4 {
+  max-width: none !important;
+  column-count: 2;
+  column-gap: 1.15rem;
+  column-fill: auto;
+  font-size: 12.5px;
+  line-height: 1.5;
+  text-align: left;
+  hyphens: manual;
+}
+
+.pdf-doc .space-y-4 > * {
+  break-inside: avoid;
+  margin-top: 0 !important;
+  margin-bottom: 0.35rem;
+}
+
+.pdf-doc figure,
+.pdf-doc table {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pdf-doc figure.overflow-hidden,
+.pdf-doc .overflow-hidden,
+.pdf-doc .overflow-x-auto {
+  overflow: visible !important;
+}
+
+.pdf-doc [class~="md:hidden"],
+.pdf-doc input,
+.pdf-doc label.relative {
+  display: none !important;
+}
+
+.pdf-doc [class~="md:block"] {
+  display: block !important;
+  max-width: 100%;
+  overflow: visible !important;
+}
+
+.pdf-doc .h-64 {
+  height: 10.6rem !important;
+  min-height: 0 !important;
+}
+
+.pdf-doc .h-72 {
+  height: 10.75rem !important;
+  min-height: 0 !important;
+}
+
+.pdf-doc .h-80 {
+  height: 12.25rem !important;
+  min-height: 0 !important;
+}
+
+.pdf-doc .h-96 {
+  height: 14rem !important;
+  min-height: 0 !important;
+}
+
+.pdf-doc .recharts-wrapper,
+.pdf-doc .recharts-responsive-container {
+  overflow: visible !important;
+}
+
+.pdf-doc table {
+  width: 100% !important;
+  min-width: 0 !important;
+  margin-left: auto;
+  margin-right: auto;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 8.7px !important;
+}
+
+.pdf-doc th:first-child,
+.pdf-doc td:first-child {
+  width: 18%;
+}
+
+.pdf-doc th {
+  font-size: 7.6px !important;
+  line-height: 1.15;
+  vertical-align: bottom;
+}
+
+.pdf-doc th,
+.pdf-doc td {
+  white-space: normal !important;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: manual;
+  padding: 3px 3px !important;
+  line-height: 1.25;
+}
+
+.pdf-doc figcaption,
+.pdf-doc .text-sm {
+  font-size: 11px;
+}
+
+.pdf-doc figure:has(.recharts-responsive-container),
+.pdf-doc tr,
+.pdf-doc h2,
+.pdf-doc .pdf-lead,
+.pdf-doc .pdf-mast {
+  break-inside: avoid;
+}
+
+.pdf-doc figure:has(table) {
+  break-inside: auto;
+  overflow: visible !important;
+}
+
+@media print {
+  .app-header,
+  .nav-panel,
+  .print-banner {
+    display: none !important;
+  }
+
+  html,
+  body {
+    background: var(--color-paper) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .app-offset {
+    padding-top: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  [class~="md:hidden"] {
+    display: none !important;
+  }
+
+  [class~="md:block"] {
+    display: block !important;
+  }
+
+  figure:has(.recharts-responsive-container) {
+    display: inline-block !important;
+    width: 100%;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    overflow: hidden;
+  }
+
+  /* Donut legends wrap on the sheet and were spilling onto the next page. */
+  figure:has(.recharts-responsive-container) .h-64 {
+    height: 24rem !important;
+  }
+
+  tr,
+  h1,
+  h2,
+  #sumario a {
+    break-inside: avoid;
+  }
+
+  h1,
+  h2 {
+    break-after: avoid;
+  }
+
+  figure:has(table) .overflow-x-auto,
+  figure:has(table).overflow-hidden {
+    overflow: visible !important;
+  }
+
+  /* Table 1 has eleven nowrap columns. Shrink the whole table so
+     every column fits the sheet and no word is broken. */
+  figure:has(th:nth-child(11)) {
+    break-inside: avoid;
+  }
+
+  figure:has(th:nth-child(11)) .overflow-x-auto {
+    display: flex !important;
+    justify-content: center !important;
+    overflow: visible !important;
+  }
+
+  figure:has(th:nth-child(11)) th,
+  figure:has(th:nth-child(11)) td {
+    padding: 2px 3px !important;
+    white-space: nowrap !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+  }
+
+  figure:has(th:nth-child(11)) table {
+    width: max-content !important;
+    min-width: 0 !important;
+    margin-inline: auto;
+    font-size: 7.5px !important;
+  }
+}
+
